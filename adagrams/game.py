@@ -28,12 +28,18 @@ def draw_letters():
         index = randint(0, len(full_letter_list) -1)
         hand.append(full_letter_list.pop(index)) #remove chosen letter to adhere to frequency count
     return hand      
-    
 
 
 def uses_available_letters(word, letter_bank):
-    pass
+    letter_bank_copy = letter_bank[:] #make copy to modify and not alter original hand
+    for char in word.upper(): #ensures no mismatched cap cases
+        if char in letter_bank_copy:
+            letter_bank_copy.remove(char) #remove used letter from hand to ensure no repetitions
+        else:
+            return False
+    return True
 
+# uses_available_letters("some", draw_letters())
 def score_word(word):
     pass
 
