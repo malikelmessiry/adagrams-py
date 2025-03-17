@@ -57,7 +57,31 @@ def score_word(word):
 
 
 def get_highest_word_score(word_list):
-    pass 
+    '''
+       2. get top score.
+       3. if tie: if word has 10 letters, it wins. if less than 10, fewer letters word wins.
+       4. if tie and score and length is tied, pick the first one in word_list. 
+       5. return "word: score" as a tuple.
+    '''
+    top_score = 0    
+    top_word = ""
+
+    for word in word_list:
+        word_score = score_word(word)
+
+        if word_score > top_score:
+            top_score = word_score
+            top_word = word #replaces top score and top word as it loops through the word_list
+        elif word_score == top_score:
+            if len(top_word) == 10:
+                continue #does not replace top word if the first word already has 10 letters
+            elif len(word) == 10 and len(top_word) != 10:
+                top_word = word # word with 10 letters wins only after checking first
+            elif len(word) < len(top_word):
+                top_word = word #prefer the shorter word with same score
+            elif len(word) == len(top_word): 
+                continue # don't do anything if the words are identical in score and length
+    return (top_word, top_score)
+                
 
 
-print(score_word("hello"))
