@@ -17,14 +17,16 @@ SCORE_CHART = {
     10: ['Q', 'Z']
 }
 
-def draw_letters():
-
-    #make letter pool of all potential letters
+# make letter pool of all potential letters
+def get_all_letters():
     full_letter_list = []
     for letter, frequency in LETTER_POOL.items():
         full_letter_list += [letter] * frequency
+    return full_letter_list
 
-    #generate 10 random letters using random index of full letter list 
+# generate 10 random letters using random index of full letter list 
+def draw_letters():
+    full_letter_list = get_all_letters()
     hand = []
     for i in range(10):
         if not full_letter_list: #check if list is empty
